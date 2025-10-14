@@ -1,55 +1,65 @@
 <div class="container">
-  <h2>Gestión de Clientes</h2>
+  <H2>Gestion de Clientes</H2>
 
-<form (ngSubmit)="guardar()" #formCliente="ngForm" class="form">
-  <input 
-    type="text" 
-    placeholder="Nombre" 
-    [(ngModel)]="clienteActual.nombre" 
-    name="nombre" 
-    #nombre="ngModel"
-    required>
-  <div *ngIf="nombre.invalid && nombre.touched" class="error">
-    El nombre es obligatorio.
+  <form #formCliente="ngForm" (ngSubmit)="guardar(formCliente)" novalidate>
+  <div>
+    <label>Nombre:</label>
+    <input
+      type="text"
+      name="nombre"
+      [(ngModel)]="clienteActual.nombre"
+      required
+      minlength="3"
+      #nombre="ngModel"
+      placeholder="Ingrese el nombre"
+    />
+
+    <!-- 🔹 Mensaje dinámico -->
+    <div class="error"
+      *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+      <small *ngIf="nombre.errors?.['required']">⚠️ El nombre es obligatorio.</small>
+      <small *ngIf="nombre.errors?.['minlength']">⚠️ Mínimo 3 caracteres.</small>
+    </div>
   </div>
 
-  <input 
-    type="email" 
-    placeholder="Correo" 
-    [(ngModel)]="clienteActual.correo" 
-    name="correo" 
-    #correo="ngModel"
-    required 
-    email>
-  <div *ngIf="correo.invalid && correo.touched" class="error">
-    Ingresa un correo válido.
+  <div>
+    <label>Correo:</label>
+    <input
+      type="email"
+      name="correo"
+      [(ngModel)]="clienteActual.correo"
+      required
+      email
+      #correo="ngModel"
+      placeholder="Ingrese el correo"
+    />
+
+    <!-- 🔹 Mensaje dinámico -->
+    <div class="error"
+      *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+      <small *ngIf="correo.errors?.['required']">⚠️ El correo es obligatorio.</small>
+      <small *ngIf="correo.errors?.['email']">⚠️ Ingrese un correo válido.</small>
+    </div>
   </div>
 
   <button type="submit" [disabled]="formCliente.invalid">
-    {{ editando ? 'Actualizar' : 'Agregar' }}
+    {{ editando ? 'Actualizar' : 'Guardar' }}
   </button>
-  <button type="button" (click)="resetForm()" *ngIf="editando">Cancelar</button>
+
+  <button type="button" (click)="resetForm(formCliente)">
+    Limpiar
+  </button>
 </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of clientes">
-        <td>{{ c.id }}</td>
-        <td>{{ c.nombre }}</td>
-        <td>{{ c.correo }}</td>
-        <td>
-          <button (click)="editar(c)">Editar</button>
-          <button (click)="eliminar(c.id)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<hr />
+
+<h3>Lista de Clientes</h3>
+<ul>
+  <li *ngFor="let c of clientes">
+    {{ c.nombre }} - {{ c.correo }}
+    <button (click)="editar(c)">Editar</button>
+    <button (click)="eliminar(c.id)">Eliminar</button>
+  </li>
+</ul>
+
 </div>

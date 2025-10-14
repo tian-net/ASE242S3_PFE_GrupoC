@@ -1,151 +1,177 @@
-/* 🎨 Contenedor principal */
+/* 🎨 CONTENEDOR PRINCIPAL */
 .container {
-  max-width: 750px;
-  margin: 2rem auto;
-  padding: 2rem;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease-in-out;
 }
 
 .container:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* 🧾 Título */
+/* 🧭 TÍTULO */
 h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1a3d7c;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
   font-size: 1.8rem;
-  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-/* 📋 Formulario */
-.form {
+/* 🧾 FORMULARIO */
+form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 1.5rem;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-.form input {
-  padding: 10px;
-  border: 1px solid #d1d5db;
+label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.3s ease;
-  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
 }
 
-.form input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+input:focus {
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
+/* ❗ VALIDACIÓN */
 input.ng-invalid.ng-touched {
-  border-color: #e74c3c;
-  background: #fff5f5;
+  border-color: #ef4444;
+  background-color: #fef2f2;
 }
 
 .error {
-  color: #e74c3c;
   font-size: 0.85rem;
-  margin-top: -6px;
+  color: #dc2626;
+  margin-top: 4px;
 }
 
-/* 🖱️ Botones del formulario */
-.form button {
-  padding: 10px;
+/* 🖱️ BOTONES */
+button {
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  padding: 10px 14px;
   font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
   font-weight: 500;
-  transition: all 0.3s ease;
 }
 
-.form button[type="submit"] {
-  background-color: #007bff;
-  color: white;
+button[type="submit"] {
+  background-color: #2563eb;
+  color: #fff;
 }
 
-.form button[type="submit"]:hover {
-  background-color: #0056b3;
+button[type="submit"]:hover {
+  background-color: #1d4ed8;
 }
 
-.form button[type="button"] {
-  background-color: #6c757d;
-  color: white;
+button[type="button"] {
+  background-color: #6b7280;
+  color: #fff;
 }
 
-.form button[type="button"]:hover {
-  background-color: #5a6268;
+button[type="button"]:hover {
+  background-color: #4b5563;
 }
 
 button[disabled] {
-  background-color: #a0aec0;
+  background-color: #cbd5e1;
   cursor: not-allowed;
 }
 
-/* 📊 Tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+/* 📋 LISTA DE CLIENTES */
+h3 {
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin-bottom: 0.8rem;
+  text-align: center;
 }
 
-table th {
-  background-color: #007bff;
-  color: white;
-  text-transform: uppercase;
-  padding: 12px;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-table td {
-  padding: 10px;
-  border-bottom: 1px solid #e5e7eb;
+li {
+  background-color: #f8fafc;
+  margin-bottom: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+  border: 1px solid #e2e8f0;
 }
 
-table tr:nth-child(even) {
-  background-color: #f8f9fa;
+li:hover {
+  background-color: #e0f2fe;
 }
 
-table tr:hover {
-  background-color: #eaf1ff;
-}
-
-/* ⚙️ Botones de acción */
-table button {
-  margin-right: 5px;
+/* ⚙️ BOTONES DE ACCIÓN */
+li button {
+  margin-left: 1rem;
   padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
+  border-radius: 6px;
+  color: #fff;
 }
 
-table button:first-child {
-  background-color: #17a2b8;
-  color: white;
+li button:first-child {
+  background-color: #0ea5e9;
 }
 
-table button:first-child:hover {
-  background-color: #138496;
+li button:first-child:hover {
+  background-color: #0284c7;
 }
 
-table button:last-child {
-  background-color: #dc3545;
-  color: white;
+li button:last-child {
+  background-color: #ef4444;
 }
 
-table button:last-child:hover {
-  background-color: #b52a36;
+li button:last-child:hover {
+  background-color: #dc2626;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  form {
+    gap: 1rem;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  li button {
+    margin-top: 0.4rem;
+  }
 }

@@ -1,14 +1,13 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
-  standalone: true, 
-  imports: [CommonModule, FormsModule], 
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
@@ -28,15 +27,15 @@ export class ClientesComponent implements OnInit {
     this.clienteService.listar().subscribe(data => this.clientes = data);
   }
 
-  guardar(): void {
+  guardar(form: NgForm): void {
     if (this.editando && this.clienteActual.id) {
       this.clienteService.actualizar(this.clienteActual.id, this.clienteActual).subscribe(() => {
-        this.resetForm();
+        this.resetForm(form);
         this.cargarClientes();
       });
     } else {
       this.clienteService.crear(this.clienteActual).subscribe(() => {
-        this.resetForm();
+        this.resetForm(form);
         this.cargarClientes();
       });
     }
@@ -53,9 +52,14 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  resetForm(): void {
+  // 🔹 Limpieza total del formulario y estado de validaciones
+  resetForm(form?: NgForm): void {
+    if (form) {
+      form.resetForm(); // limpia valores y estados
+      form.form.markAsPristine();   // acceso correcto al FormGroup interno
+      form.form.markAsUntouched();    // sin tocar
+    }
     this.clienteActual = { nombre: '', correo: '' };
     this.editando = false;
   }
 }
- 
