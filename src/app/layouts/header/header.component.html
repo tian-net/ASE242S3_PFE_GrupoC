@@ -1,0 +1,22 @@
+<header class="header bg-gray-100 shadow">
+  <div class="container mx-auto flex items-center justify-between py-4 px-6">
+    <h1 class="logo text-2xl font-bold">Mi Empresa</h1>
+    <nav>
+      <ul class="nav-links flex space-x-6">
+        <li>
+          <a routerLink="/" class="hover:text-blue-500">Inicio</a>
+        </li>
+        <li>
+          <a routerLink="/" fragment="sobre-nosotros" class="hover:text-blue-500">Sobre Nosotros</a>
+        </li>
+        <li>
+          <!-- 👇 Aquí redirigimos al CRUD de clientes -->
+          <a routerLink="/clientes" class="hover:text-blue-500">Servicios</a>
+        </li>
+        <li>
+          <a routerLink="/contacto" class="hover:text-blue-500">Contacto</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

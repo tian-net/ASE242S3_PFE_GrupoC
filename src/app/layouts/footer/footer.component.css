@@ -1,0 +1,23 @@
+.footer {
+  background: #0d47a1;
+  color: #fff;
+  padding: 30px 0;
+}
+.footer .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.footer .socials a img {
+  width: 24px;
+  margin: 0 5px;
+  filter: brightness(0) invert(1);
+  transition: transform .3s;
+}
+.footer .socials a img:hover {
+  transform: scale(1.2);
+}

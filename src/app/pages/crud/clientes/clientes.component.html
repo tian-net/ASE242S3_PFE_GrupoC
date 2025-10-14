@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Gestión de Clientes</h2>
+
+<form (ngSubmit)="guardar()" #formCliente="ngForm" class="form">
+  <input 
+    type="text" 
+    placeholder="Nombre" 
+    [(ngModel)]="clienteActual.nombre" 
+    name="nombre" 
+    #nombre="ngModel"
+    required>
+  <div *ngIf="nombre.invalid && nombre.touched" class="error">
+    El nombre es obligatorio.
+  </div>
+
+  <input 
+    type="email" 
+    placeholder="Correo" 
+    [(ngModel)]="clienteActual.correo" 
+    name="correo" 
+    #correo="ngModel"
+    required 
+    email>
+  <div *ngIf="correo.invalid && correo.touched" class="error">
+    Ingresa un correo válido.
+  </div>
+
+  <button type="submit" [disabled]="formCliente.invalid">
+    {{ editando ? 'Actualizar' : 'Agregar' }}
+  </button>
+  <button type="button" (click)="resetForm()" *ngIf="editando">Cancelar</button>
+</form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.correo }}</td>
+        <td>
+          <button (click)="editar(c)">Editar</button>
+          <button (click)="eliminar(c.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

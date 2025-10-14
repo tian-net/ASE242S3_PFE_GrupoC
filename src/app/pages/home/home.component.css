@@ -1,0 +1,282 @@
+/* Global */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Hero */
+.hero {
+  background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=60');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.3rem;
+}
+
+/* Misión y Visión */
+.mision-vision {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.mision-vision h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #004aad;
+}
+
+.mv-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mv-card {
+  background: white;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.mv-card:hover {
+  transform: translateY(-5px);
+}
+
+.mv-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.mv-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Valores */
+.valores {
+  background-color: #f1f1f1;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.valores h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #004aad;
+}
+
+.valores ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.valores li {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  font-weight: 500;
+  min-width: 200px;
+}
+
+/* Servicios */
+.servicios {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.servicios h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #004aad;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 300px;
+  transition: transform 0.3s;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card p {
+  color: #555;
+}
+
+/* Casos de Éxito */
+.proyectos {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.proyectos h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #004aad;
+}
+
+.proyectos-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.proyecto {
+  background: white;
+  border-radius: 12px;
+  max-width: 320px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.proyecto:hover {
+  transform: translateY(-5px);
+}
+
+.proyecto img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.proyecto h3 {
+  margin: 15px 0 10px;
+}
+
+.proyecto p {
+  padding: 0 15px 20px;
+  color: #555;
+}
+
+/* Clientes */
+.clientes {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.clientes h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #004aad;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.logos img {
+  max-height: 80px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.logos img:hover {
+  transform: scale(1.1);
+}
+
+/* FAQ */
+.faq {
+  padding: 60px 20px;
+  background-color: #f1f1f1;
+}
+
+.faq h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #004aad;
+  margin-bottom: 30px;
+}
+
+.faq-item {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+}
+
+.faq-item h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mv-cards, .cards, .proyectos-cards, .valores ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
