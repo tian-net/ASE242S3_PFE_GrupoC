@@ -16,6 +16,9 @@ public class Cliente {
     @Column(nullable = false, length = 100)
     private String correo;
 
+    @Column(nullable = false, length = 9)
+    private String telefono;
+
     // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -25,4 +28,7 @@ public class Cliente {
 
     public String getCorreo() { return correo; }
     public void setCorreo(String correo) { this.correo = correo; }
+    
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 }

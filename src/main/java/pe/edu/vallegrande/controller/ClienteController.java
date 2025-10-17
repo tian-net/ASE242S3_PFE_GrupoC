@@ -41,6 +41,7 @@ public class ClienteController {
                 .map(c -> {
                     c.setNombre(cliente.getNombre());
                     c.setCorreo(cliente.getCorreo());
+                    c.setTelefono(cliente.getTelefono());
                     return ResponseEntity.ok(service.guardar(c));
                 })
                 .orElse(ResponseEntity.notFound().build());
