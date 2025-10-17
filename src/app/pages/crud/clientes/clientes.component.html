@@ -1,65 +1,168 @@
 <div class="container">
-  <H2>Gestion de Clientes</H2>
-
-  <form #formCliente="ngForm" (ngSubmit)="guardar(formCliente)" novalidate>
-  <div>
-    <label>Nombre:</label>
-    <input
-      type="text"
-      name="nombre"
-      [(ngModel)]="clienteActual.nombre"
-      required
-      minlength="3"
-      #nombre="ngModel"
-      placeholder="Ingrese el nombre"
-    />
-
-    <!-- 🔹 Mensaje dinámico -->
-    <div class="error"
-      *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
-      <small *ngIf="nombre.errors?.['required']">⚠️ El nombre es obligatorio.</small>
-      <small *ngIf="nombre.errors?.['minlength']">⚠️ Mínimo 3 caracteres.</small>
-    </div>
+  <div class="header">
+    <h1>Gestión de Clientes</h1>
+    <p class="subtitle">Sistema con Formularios Reactivos - Angular</p>
   </div>
 
-  <div>
-    <label>Correo:</label>
-    <input
-      type="email"
-      name="correo"
-      [(ngModel)]="clienteActual.correo"
-      required
-      email
-      #correo="ngModel"
-      placeholder="Ingrese el correo"
-    />
+  <!--  FORMULARIO REACTIVO con [formGroup] -->
+  <div class="card">
+    <h2>{{ editando ? ' Actualizar Cliente' : ' Registrar Nuevo Cliente' }}</h2>
+    
+    <form [formGroup]="clienteForm" (ngSubmit)="guardar()" novalidate>
+      
+      <!--  Campo Nombre con validaciones reactivas -->
+      <div class="form-group">
+        <label for="nombre">Nombre Completo <span class="required">*</span></label>
+        <input
+          id="nombre"
+          type="text"
+          formControlName="nombre"
+          placeholder="Ingrese el nombre completo (mínimo 3 caracteres)"
+          [class.invalid]="campoInvalido('nombre')"
+        />
 
-    <!-- 🔹 Mensaje dinámico -->
-    <div class="error"
-      *ngIf="correo.invalid && (correo.dirty || correo.touched)">
-      <small *ngIf="correo.errors?.['required']">⚠️ El correo es obligatorio.</small>
-      <small *ngIf="correo.errors?.['email']">⚠️ Ingrese un correo válido.</small>
-    </div>
+        <!--  MENSAJES DE ERROR DINÁMICOS EN TIEMPO REAL -->
+        <div class="error" *ngIf="campoInvalido('nombre')">
+          <small *ngIf="nombre?.errors?.['required']"> El nombre es obligatorio.</small>
+          <small *ngIf="nombre?.errors?.['minlength']">
+           El nombre debe tener al menos {{ nombre?.errors?.['minlength'].requiredLength }} caracteres.
+          </small>
+        </div>
+      </div>
+
+      <!--  Campo Correo con validaciones reactivas -->
+      <div class="form-group">
+        <label for="correo">Correo Electrónico <span class="required">*</span></label>
+        <input
+          id="correo"
+          type="email"
+          formControlName="correo"
+          placeholder="ejemplo@correo.com"
+          [class.invalid]="campoInvalido('correo')"
+        />
+
+        <!--  MENSAJES DE ERROR DINÁMICOS EN TIEMPO REAL -->
+        <div class="error" *ngIf="campoInvalido('correo')">
+          <small *ngIf="correo?.errors?.['required']"> El correo es obligatorio.</small>
+          <small *ngIf="correo?.errors?.['email']"> Ingrese un correo válido con formato: usuario@dominio.com</small>
+        </div>
+      </div>
+
+      <!--  Campo Teléfono (CAMPO ADICIONAL PARA PUNTOS EXTRA) -->
+      <div class="form-group">
+        <label for="telefono">Teléfono <span class="required">*</span></label>
+        <input
+          id="telefono"
+          type="text"
+          formControlName="telefono"
+          placeholder="Ej: 987654321 (9 dígitos, comienza con 9)"
+          [class.invalid]="campoInvalido('telefono')"
+          maxlength="9"
+        />
+
+        <!--  MENSAJES DE ERROR DINÁMICOS EN TIEMPO REAL -->
+        <div class="error" *ngIf="campoInvalido('telefono')">
+          <small *ngIf="telefono?.errors?.['required']"> El teléfono es obligatorio.</small>
+          <small *ngIf="telefono?.errors?.['pattern']">
+             El teléfono debe tener 9 dígitos y comenzar con 9 (Ej: 987654321).
+          </small>
+        </div>
+      </div>
+
+      <!--  BOTONES CON VALIDACIÓN -->
+      <div class="form-actions">
+        <!--  BOTÓN DESHABILITADO SI EL FORMULARIO ES INVÁLIDO -->
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="clienteForm.invalid"
+          [title]="clienteForm.invalid ? 'Complete todos los campos correctamente' : ''"
+        >
+          {{ editando ? ' Actualizar' : ' Guardar' }}
+        </button>
+
+        <!--  Botón para limpiar el formulario después de guardar o cancelar -->
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="limpiarFormulario()"
+        >
+           {{ editando ? 'Cancelar' : 'Limpiar' }}
+        </button>
+      </div>
+
+      <!-- Indicador de estado del formulario -->
+      <div class="form-status">
+        <small>
+          Estado del formulario: 
+          <strong [class.valid]="clienteForm.valid" [class.invalid]="clienteForm.invalid">
+            {{ clienteForm.valid ? ' Válido' : ' Inválido' }}
+          </strong>
+        </small>
+      </div>
+    </form>
   </div>
 
-  <button type="submit" [disabled]="formCliente.invalid">
-    {{ editando ? 'Actualizar' : 'Guardar' }}
-  </button>
 
-  <button type="button" (click)="resetForm(formCliente)">
-    Limpiar
-  </button>
-</form>
+  <hr class="divider" />
 
-<hr />
+  <!--  TABLA DE DATOS CON ACCIONES DE EDITAR Y ELIMINAR -->
+  <div class="card">
+    <h2>Lista de Clientes Registrados</h2>
+    
+    <div *ngIf="clientes.length > 0; else sinDatos">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Correo Electrónico</th>
+              <th>Teléfono</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of clientes; let i = index">
+              <td>{{ c.id }}</td>
+              <td>{{ c.nombre }}</td>
+              <td>{{ c.correo }}</td>
+              <td>{{ c.telefono || 'N/A' }}</td>
+              <td class="acciones">
+                <!--  Botón Editar - Manejo de evento editar -->
+                <button 
+                  class="btn btn-edit" 
+                  (click)="editar(c)"
+                  title="Editar cliente"
+                >
+                   Editar
+                </button>
+                <!--  Botón Eliminar - Manejo de evento eliminar -->
+                <button 
+                  class="btn btn-delete" 
+                  (click)="eliminar(c.id)"
+                  title="Eliminar cliente"
+                >
+                   Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<h3>Lista de Clientes</h3>
-<ul>
-  <li *ngFor="let c of clientes">
-    {{ c.nombre }} - {{ c.correo }}
-    <button (click)="editar(c)">Editar</button>
-    <button (click)="eliminar(c.id)">Eliminar</button>
-  </li>
-</ul>
+      <div class="table-footer">
+        <p>Total de clientes: <strong>{{ clientes.length }}</strong></p>
+      </div>
+    </div>
 
+    <!-- Mensaje cuando no hay datos -->
+    <ng-template #sinDatos>
+      <div class="sin-datos">
+        <div class="sin-datos-icon"></div>
+        <p>No hay clientes registrados</p>
+        <p class="subtitle">¡Registra el primer cliente usando el formulario!</p>
+      </div>
+    </ng-template>
+  </div>
 </div>
